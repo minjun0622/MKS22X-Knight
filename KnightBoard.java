@@ -9,6 +9,7 @@ public KnightBoard(int r, int c){
     throw IllegalArgumentException();
   }
   board = new int[r][c];
+  toString();
 }
 
   //Initialize the board to the correct size and make them all 0's
@@ -17,7 +18,7 @@ public String toString(){
     for (int x = 0; x < board.length; x++){
       board[i][x] = '_';
       if (Math.pow((board.length - 1) 2)){
-        board[i][x] =
+        board[i][x] = //something with two digits.
       }
     }
   }
@@ -63,13 +64,17 @@ Modifies the board by labeling the moves from 1 (at startingRow,startingCol) up 
 */
 
 public boolean solve(int r, int c){
-  if (board[r][c] != 0) {
-    throw IllegalStateException();
-  }
   if (r <= 0 || r >= board.length || c <= 0 || c >= board.length) {
     throw IllegalArgumentException();
   }
-  if
+  for (int i = 0; i < board.length; i++){
+    for(int x = 0; x < board.length; x++){
+      if (board[i][x] != 0) {
+        throw IllegalStateException();
+      }
+
+    }
+  }
 
 }
 
@@ -81,6 +86,14 @@ public boolean solve(int r, int c){
 @returns the number of solutions from the starting position specified
 */
 public int countSolutions(int r, int c){
+  for (int i = 0; i < board.length; i++){
+    for (int x = 0; x < board.length; x++){
+      if (board[i][x] != 0){
+        throw IllegalStateException();
+      }
+
+    }
+  }
 
 }
 
@@ -88,8 +101,5 @@ public int countSolutions(int r, int c){
 private boolean solveH(int row ,int col, int level){
 
 }
-// level is the # of the knight
-
-// I will not be testing boards that have a rows*cols that is >= 100, as the program would take a long time to complete.
 
 }
