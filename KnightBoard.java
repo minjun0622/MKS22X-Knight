@@ -14,12 +14,13 @@ public KnightBoard(int r, int c){
 
   //Initialize the board to the correct size and make them all 0's
 public String toString(){
+  int count = 0;
   String result = "";
   for (int i = 0; i < board.length; i++){
     for (int x = 0; x < board.length; x++){
       board[i][x] = '_';
       if (Math.pow((board.length - 1) 2)){
-        board[i][x] = //something with two digits.
+        board[i][x] +=  count;//something with two digits.
 
       }
     }
@@ -66,8 +67,6 @@ Modifies the board by labeling the moves from 1 (at startingRow,startingCol) up 
 @returns true when the board is solvable from the specified starting position
 */
 
-
-
 /*
 moves for a knight in a chess piece.
 0 0 0 0 0
@@ -83,6 +82,7 @@ moving right up - board[i + 1][x - 1]
 moving right down - board[i + 1][x + 1]
 moving left up - board[i - 1][x - 1]
 moving left down - board[i - 1][x + 1]
+8 move
 */
 
 public boolean solve(int r, int c){
@@ -106,6 +106,13 @@ public boolean solve(int r, int c){
       if (board[i - 2][x - 2] = 0){
         board[i][x]++;
       }
+      if (board[i + 2][x - 1] = 0){
+        board[i][x]++;
+      }
+      if(board[i + 1][x - 1] = 0){
+        board[i][x]++;
+      }
+
     }
     return false;
   }
@@ -114,17 +121,22 @@ public boolean solve(int r, int c){
 
 
 
-/* @throws IllegalStateException when the board contains non-zero values.
+/*
+@throws IllegalStateException when the board contains non-zero values.
 @throws IllegalArgumentException when either parameter is negative
  or out of bounds.
 @returns the number of solutions from the starting position specified
 */
 public int countSolutions(int r, int c){
+  if (r < 0 || c < 0 || r >= board.length || c >= board.length){
+    throw IllegalArgumentException();
+  }
   for (int i = 0; i < board.length; i++){
     for (int x = 0; x < board.length; x++){
       if (board[i][x] != 0){
         throw IllegalStateException();
       }
+
 
     }
   }
