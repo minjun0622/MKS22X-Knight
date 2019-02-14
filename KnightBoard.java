@@ -1,5 +1,14 @@
 public class KnightBoard {
 
+public static void main(String[] args) {
+  a = new KnightBoard(5, 5);
+}
+
+
+
+
+
+
 private int[][] board;
 
 //if the dimensions of the board are odd, then it means that it will not be a closed tour.
@@ -82,7 +91,6 @@ moving right up - board[i + 1][x - 1]
 moving right down - board[i + 1][x + 1]
 moving left up - board[i - 1][x - 1]
 moving left down - board[i - 1][x + 1]
-8 move
 */
 
 public boolean solve(int r, int c){
@@ -131,8 +139,15 @@ public boolean solve(int r, int c){
 @throws IllegalArgumentException when either parameter is negative
  or out of bounds.
 @returns the number of solutions from the starting position specified
+
+TOURS ARE CLOSED WHEN
+m and n are both odd
+m = 1, 2, or 4
+m = 3 and n = 4, 6, or 8.
 */
+
 public int countSolutions(int r, int c){
+  int count = 0;
   if (r < 0 || c < 0 || r >= board.length || c >= board.length){
     throw IllegalArgumentException();
   }
@@ -141,11 +156,12 @@ public int countSolutions(int r, int c){
       if (board[i][x] != 0){
         throw IllegalStateException();
       }
-
-
+      if (board[i][x] = r * c){
+        count++;
+      }
     }
   }
-
+  return count;
 }
 
 //Suggestion:
