@@ -1,6 +1,6 @@
 public class KnightBoard {
 
-  private int[][] board;
+private int[][] board;
 
 //if the dimensions of the board are odd, then it means that it will not be a closed tour.
 //@throws IllegalArgumentException when either parameter is <= 0.
@@ -20,7 +20,7 @@ public String toString(){
     for (int x = 0; x < board.length; x++){
       board[i][x] = '_';
       if (Math.pow((board.length - 1) 2)){
-        board[i][x] +=  count;//something with two digits.
+        board[i][x] += " " + count;//something with two digits.
 
       }
     }
@@ -94,27 +94,32 @@ public boolean solve(int r, int c){
       if (board[i][x] != 0) {
         throw IllegalStateException();
       }
-      if (board[i + 1][x + 2] = 0){
+      if (board[i - 2][x + 1] = 0){
         board[i][x]++;
       }
-      if (board[i + 2][x + 1] = 0){
-        board[i][x]++;
-      }
-      if (board[i - 1][x - 2] = 0){
-        board[i][x]++;
-      }
-      if (board[i - 2][x - 2] = 0){
+      if (board[i - 2][x - 1] = 0){
         board[i][x]++;
       }
       if (board[i + 2][x - 1] = 0){
         board[i][x]++;
       }
-      if(board[i + 1][x - 1] = 0){
+      if (board[i + 2][x + 1] = 0){
         board[i][x]++;
       }
-
+      if (board[i + 1][x - 1] = 0){
+        board[i][x]++;
+      }
+      if(board[i + 1][x + 1] = 0){
+        board[i][x]++;
+      }
+      if (board[i - 1][x - 1] = 0) {
+        board[i][x]++;
+      }
+      if (board[i - 1][x + 1] = 0){
+        board[i][x]++;
+      }
+      return false;
     }
-    return false;
   }
   return true;
 }
