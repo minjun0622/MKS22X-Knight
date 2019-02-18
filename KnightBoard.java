@@ -1,15 +1,11 @@
 public class KnightBoard {
+  private int[][] board;
 
 public static void main(String[] args) {
   a = new KnightBoard(5, 5);
 }
 
 
-
-
-
-
-private int[][] board;
 
 //if the dimensions of the board are odd, then it means that it will not be a closed tour.
 //@throws IllegalArgumentException when either parameter is <= 0.
@@ -18,7 +14,15 @@ public KnightBoard(int r, int c){
     throw IllegalArgumentException();
   }
   board = new int[r][c];
-  toString();
+  clear();
+}
+
+private void clear(){
+  for (int i = 0; i < board.length; i++){
+    for (int x = 0; x < board.length; x++){
+      board[i][x] = 0;
+    }
+  }
 }
 
   //Initialize the board to the correct size and make them all 0's
@@ -27,14 +31,32 @@ public String toString(){
   String result = "";
   for (int i = 0; i < board.length; i++){
     for (int x = 0; x < board.length; x++){
-      board[i][x] = '_';
-      if (Math.pow((board.length - 1) 2)){
-        board[i][x] += " " + count;//something with two digits.
-
+      if (board.length * board[i].length < 10) {
+        if (board[i][x] == 0){
+          result += '_';
+        }
+        else {
+          result += " " + board[row][col] + " ";
+        }
       }
+      else {
+        if (board[i][x] < 10){
+          if (board[i][x] == 0){
+            result += " _ ";
+          }
+          else {
+            result += " " + board[i][x] + " ";
+          }
+        }
+        else {
+          result += board[i][x] + " ";
+        }
+      }
+      }
+      result += "\n";
     }
+    return result;
   }
-}
 
 /*
 see format for toString below
