@@ -1,5 +1,19 @@
 public class KnightBoard {
-  private int[][] board;
+  int[][] board;
+  //2 arrays storing the moves of the board. My notes were converted basically.
+  int[] movesRow = {2,  2, 1, -1, -2, -2,  1, -1};
+  int[] movesCol = {1, -1, 2,  2,  1, -1, -2, -2};
+
+  /*
+  moving up right - board[i - 2][x + 1]
+  moving up left - board[i - 2][x - 1]
+  moving down left - board[i + 2][i - 1]
+  moving down right - board[i + 2][i + 1]
+  moving right up - board[i + 1][x - 1]
+  moving right down - board[i + 1][x + 1]
+  moving left up - board[i - 1][x - 1]
+  moving left down - board[i - 1][x + 1]
+  */
 
 public static void main(String[] args) {
   a = new KnightBoard(5, 5);
@@ -14,7 +28,6 @@ public KnightBoard(int r, int c){
     throw IllegalArgumentException();
   }
   board = new int[r][c];
-  clear();
 }
 
 private void clear(){
@@ -105,14 +118,6 @@ moves for a knight in a chess piece.
 0 0 0 0 0
 0 0 0 0 0
 0 0 0 0 0
-moving up right - board[i - 2][x + 1]
-moving up left - board[i - 2][x - 1]
-moving down left - board[i + 2][i - 1]
-moving down right - board[i + 2][i + 1]
-moving right up - board[i + 1][x - 1]
-moving right down - board[i + 1][x + 1]
-moving left up - board[i - 1][x - 1]
-moving left down - board[i - 1][x + 1]
 */
 
 public boolean solve(int r, int c){
@@ -124,35 +129,15 @@ public boolean solve(int r, int c){
       if (board[i][x] != 0) {
         throw IllegalStateException();
       }
-      if (board[i - 2][x + 1] = 0){
-        board[i][x]++;
-      }
-      if (board[i - 2][x - 1] = 0){
-        board[i][x]++;
-      }
-      if (board[i + 2][x - 1] = 0){
-        board[i][x]++;
-      }
-      if (board[i + 2][x + 1] = 0){
-        board[i][x]++;
-      }
-      if (board[i + 1][x - 1] = 0){
-        board[i][x]++;
-      }
-      if(board[i + 1][x + 1] = 0){
-        board[i][x]++;
-      }
-      if (board[i - 1][x - 1] = 0) {
-        board[i][x]++;
-      }
-      if (board[i - 1][x + 1] = 0){
-        board[i][x]++;
-      }
-      return false;
     }
   }
-  return true;
+  return solveH(r, c);
 }
+
+private boolean solveH(int row ,int col, int level){
+
+}
+
 
 
 
@@ -185,10 +170,4 @@ public int countSolutions(int r, int c){
   }
   return count;
 }
-
-//Suggestion:
-private boolean solveH(int row ,int col, int level){
-
-}
-
 }
