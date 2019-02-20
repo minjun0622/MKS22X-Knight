@@ -135,6 +135,9 @@ public boolean solve(int r, int c){
 }
 
 private boolean solveH(int row ,int col, int level){
+  if (row < 0 || row >= board.length || col < 0 || col > board.length) {
+    return false;
+  }
 
 }
 
