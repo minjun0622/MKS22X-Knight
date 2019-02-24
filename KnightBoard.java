@@ -49,7 +49,7 @@ public String toString(){
           result += '_';
         }
         else {
-          result += " " + board[row][col] + " ";
+          result += " " + board[i][x] + " ";
         }
       }
       else {
@@ -120,6 +120,18 @@ moves for a knight in a chess piece.
 0 0 0 0 0
 */
 
+//similar fashion to queens. kinda easy.
+private boolean addKnight(int r, int c, int number){
+  if (r < 0 || r >= board.length || c < 0 || c >= board.length) {
+    return false;
+  }
+  if (board[r][c) != 0){
+    return false;
+  }
+  board[r][c] = number;
+  return true;
+}
+
 public boolean solve(int r, int c){
   if (r <= 0 || r >= board.length || c <= 0 || c >= board.length) {
     throw IllegalArgumentException();
@@ -134,15 +146,12 @@ public boolean solve(int r, int c){
   return solveH(r, c);
 }
 
-private boolean solveH(int row ,int col, int level){
-  if (row < 0 || row >= board.length || col < 0 || col > board.length) {
+private boolean solveH(int r ,int c, int level){
+  if (row < 0 || row >= board.length || c < 0 || c > board.length) {
     return false;
   }
 
 }
-
-
-
 
 /*
 @throws IllegalStateException when the board contains non-zero values.
