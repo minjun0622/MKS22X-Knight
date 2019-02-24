@@ -26,6 +26,7 @@ public KnightBoard(int r, int c){
     throw IllegalArgumentException();
   }
   board = new int[r][c];
+  clear();
 }
 
 private void clear(){
@@ -153,14 +154,24 @@ public boolean solve(int r, int c){
       }
     }
   }
-  return solveH(r, c);
+  return solveH(r, c, 1);
 }
 
 private boolean solveH(int r ,int c, int level){
-  if (row < 0 || row >= board.length || c < 0 || c > board.length) {
-    return false;
+  if (level == board.length * board.length + 1){
+    return true;
   }
-
+  for (int i = 0; i < board.length; i++) {
+    for (int x = 0; x < board.length; x++){
+      if (addKnight(r, c, level)) {
+        if (solveH(r + moves[i][x], c + moves[i][x + 1], level + 1)){
+          return true;
+        }
+      else removeKnight(r, c);
+    }
+  }
+}
+return false;
 }
 
 /*
