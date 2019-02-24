@@ -132,6 +132,18 @@ private boolean addKnight(int r, int c, int number){
   return true;
 }
 
+//similar to addKnight except there's no number. If it can be removed, just remove.
+private boolean removeKnight(int r, int c){
+  if (r < 0 || r >= board.length || c < 0 || c >= board.length){
+    return false;
+  }
+  if (board[r][c] == 0) {
+    return false;
+  }
+  board[r][c] = 0;
+  return true;
+}
+
 public boolean solve(int r, int c){
   if (r <= 0 || r >= board.length || c <= 0 || c >= board.length) {
     throw IllegalArgumentException();
