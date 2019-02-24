@@ -1,9 +1,7 @@
 public class KnightBoard {
   int[][] board;
-  //2 arrays storing the moves of the board. My notes were converted basically.
-  int[] movesRow = {2,  2, 1, -1, -2, -2,  1, -1};
-  int[] movesCol = {1, -1, 2,  2,  1, -1, -2, -2};
-
+  //2d arrays storing the moves of the board. My notes were converted basically.
+  int[][] moves = {{1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {2, 1}, {2, -1}, {-2, 1}, {-2, -1}};
   /*
   moving up right - board[i - 2][x + 1]
   moving up left - board[i - 2][x - 1]
@@ -178,7 +176,6 @@ m = 3 and n = 4, 6, or 8.
 */
 
 public int countSolutions(int r, int c){
-  int count = 0;
   if (r < 0 || c < 0 || r >= board.length || c >= board.length){
     throw IllegalArgumentException();
   }
@@ -187,11 +184,12 @@ public int countSolutions(int r, int c){
       if (board[i][x] != 0){
         throw IllegalStateException();
       }
-      if (board[i][x] = r * c){
-        count++;
-      }
     }
   }
-  return count;
+  return countHelper(r, c, 1);
 }
+
+private int countHelper(int r, int c, int number){
+  int count = 0;
+
 }
