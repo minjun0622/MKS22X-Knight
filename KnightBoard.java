@@ -1,5 +1,5 @@
 public class KnightBoard {
-  int[][] board;
+  private int[][] board;
   //2d arrays storing the moves of the board. My notes were converted basically.
   int[][] moves = {{1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {2, 1}, {2, -1}, {-2, 1}, {-2, -1}};
   /*
@@ -13,17 +13,19 @@ public class KnightBoard {
   moving left down - board[i - 1][x + 1]
   */
 
-public static void main(String[] args) {
-  a = new KnightBoard(5, 5);
-}
-
+  public static void main(String[] args) {
+     KnightBoard knight = new KnightBoard(4, 4);
+    //System.out.println(knight.solve(0, 0));
+    // System.out.println(knight);
+     System.out.println(knight.countSolutions(2, 1));
+   }
 
 
 //if the dimensions of the board are odd, then it means that it will not be a closed tour.
 //@throws IllegalArgumentException when either parameter is <= 0.
 public KnightBoard(int r, int c){
   if (r <= 0 || c <= 0){
-    throw IllegalArgumentException();
+    throw new IllegalArgumentException();
   }
   board = new int[r][c];
   clear();
@@ -100,7 +102,6 @@ So it looks like this:
  8  9 10 12
 13 14  5 16
 */
-}
 
 /*
 Modifies the board by labeling the moves from 1 (at startingRow,startingCol) up to the area of the board in proper knight move steps.
@@ -124,7 +125,7 @@ private boolean addKnight(int r, int c, int number){
   if (r < 0 || r >= board.length || c < 0 || c >= board.length) {
     return false;
   }
-  if (board[r][c) != 0){
+  if (board[r][c] != 0){
     return false;
   }
   board[r][c] = number;
@@ -145,12 +146,12 @@ private boolean removeKnight(int r, int c){
 
 public boolean solve(int r, int c){
   if (r <= 0 || r >= board.length || c <= 0 || c >= board.length) {
-    throw IllegalArgumentException();
+    throw new IllegalArgumentException();
   }
   for (int i = 0; i < board.length; i++){
     for(int x = 0; x < board.length; x++){
       if (board[i][x] != 0) {
-        throw IllegalStateException();
+        throw new IllegalStateException();
       }
     }
   }
@@ -188,12 +189,12 @@ m = 3 and n = 4, 6, or 8.
 
 public int countSolutions(int r, int c){
   if (r < 0 || c < 0 || r >= board.length || c >= board.length){
-    throw IllegalArgumentException();
+    throw new IllegalArgumentException();
   }
   for (int i = 0; i < board.length; i++){
     for (int x = 0; x < board.length; x++){
       if (board[i][x] != 0){
-        throw IllegalStateException();
+        throw new IllegalStateException();
       }
     }
   }
@@ -214,4 +215,6 @@ private int countHelper(int r, int c, int number){
     }
   }
   return count;
+}
+
 }
