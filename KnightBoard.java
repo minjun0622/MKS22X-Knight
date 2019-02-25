@@ -202,5 +202,16 @@ public int countSolutions(int r, int c){
 
 private int countHelper(int r, int c, int number){
   int count = 0;
-
+  if (number == board.length * board.length + 1){
+    return 1;
+  }
+  for (int i = 0; i < board.length; i++){
+    for (int x = 0; x < board.length; x++){
+      if (addKnight(r, c, number)) {
+        count += countHelper(r + moves[i][x], c + moves[i][x + 1], number + 1);
+        removeKnight(r, c);
+      }
+    }
+  }
+  return count;
 }
