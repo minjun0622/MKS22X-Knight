@@ -1,7 +1,7 @@
 public class KnightBoard {
   private int[][] board;
   //2d arrays storing the moves of the board. My notes were converted basically.
-  int[][] moves = {{1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {2, 1}, {2, -1}, {-2, 1}, {-2, -1}};
+  private int[] moves{2,1, 1,2, -2,-1, -1,-2, -2,1, 2,-1, -1,2, 1,-2};
   /*
   moving up right - board[i - 2][x + 1]
   moving up left - board[i - 2][x - 1]
@@ -73,36 +73,6 @@ public String toString(){
     return result;
   }
 
-/*
-see format for toString below
-blank boards display 0's as underscores
-you get a blank board if you never called solve or
-when there is no solution
-
-Use the following format for toString:
-
-(THESE ARE NOT VALID SOLUTIONS, They JUST TO DEMONSTRATE FORMAT)
-
-Single spaces between numbers, but leading spaces on single digit numbers:
- 1  2  5
- 3  4  6
- 7  8  9
-
-Which is equivalant to: " 1  2  5\n 3  4  6\n 7  8  9\n"
-
-When there are two digit numbers (rows*cols >= 10) Put a leading space in front of single digit numbers:
-(spaces replaced with _ to show the difference)
-_1 _2 15 _6
-_3 _4 _7 11
-_8 _9 10 12
-13 14 _5 16
-
-So it looks like this:
- 1  2 15  6
- 3  4  7 11
- 8  9 10 12
-13 14  5 16
-*/
 
 /*
 Modifies the board by labeling the moves from 1 (at startingRow,startingCol) up to the area of the board in proper knight move steps.
@@ -110,15 +80,6 @@ Modifies the board by labeling the moves from 1 (at startingRow,startingCol) up 
 @throws IllegalArgumentException when either parameter is negative
  or out of bounds.
 @returns true when the board is solvable from the specified starting position
-*/
-
-/*
-moves for a knight in a chess piece.
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
 */
 
 //similar fashion to queens. kinda easy.
@@ -160,17 +121,19 @@ public boolean solve(int r, int c){
 }
 
 private boolean solveH(int r ,int c, int level){
-  if (level == board.length * board[0].length + 1){
+  if (level == board.length * board[0].length){
     return true;
   }
   for (int i = 0; i < board.length; i++) {
-      if (addKnight(r + moves[i][0], c + moves[i][1], level)) {
-        if (solveH(r + moves[i][0], c + moves[i][1], level + 1)) {
+      if (addKnight(r + moves[i], c + moves[i + 1], level + 1)) {
+        if (solveH(r + moves[i], c + moves[i + 1], level + 1)) {
           return true;
         }
-      else removeKnight(r + moves[i][0], c + moves[i][1]);
+      else {
+      removeKnight(r + moves[i], c + moves[i + 1], level + 1);
     }
   }
+}
 return false;
 }
 
@@ -191,7 +154,7 @@ public int countSolutions(int r, int c){
     throw new IllegalArgumentException();
   }
   for (int i = 0; i < board.length; i++){
-    for (int x = 0; x < board.length; x++){
+    for (int x = 0; x < board[i].length; x++){
       if (board[i][x] != 0){
         throw new IllegalStateException();
       }
