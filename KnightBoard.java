@@ -1,7 +1,7 @@
 public class KnightBoard {
   private int[][] board;
   //array storing the moves of the board. My notes were converted basically.
-  private int[] moves{2,1, 1,2, -2,-1, -1,-2, -2,1, 2,-1, -1,2, 1,-2};
+  private int[][] = {{1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {2, 1}, {2, -1}, {-2, 1}, {-2, -1}};
   /*
   moving up right - board[i - 2][x + 1]
   moving up left - board[i - 2][x - 1]
@@ -84,31 +84,29 @@ public boolean solve(int r, int c){
     throw new IllegalArgumentException();
   }
   for (int i = 0; i < board.length; i++){
-    for(int x = 0; x < board.length; x++){
+    for(int x = 0; x < board[i].length; x++){
       if (board[i][x] != 0) {
         throw new IllegalStateException();
       }
     }
   }
+  board[r][c] = 1;
   return solveH(r, c, 1);
 }
 
 private boolean solveH(int r ,int c, int level){
-  if (level == board.length * board[0].length){
-    return true;
-  }
-  for (int i = 0; i < board.length; i++) {
-      if (addKnight(r + moves[i], c + moves[i + 1], level + 1)) {
-        if (solveH(r + moves[i], c + moves[i + 1], level + 1)) {
+  if (level == board.length * board[0].length + 1)
+      return true;
+    for (int i = 0; i < moves.length; i++) {
+      if (addKnight(r+moves[i][0], c+moves[i][1], level)) {
+        if (solveH(r+moves[i][0], c+moves[i][1], level+1)) {
           return true;
         }
-      else {
-      removeKnight(r + moves[i], c + moves[i + 1], level + 1);
+        else removeKnight(r+moves[i][0], c+moves[i][1]);
+      }
     }
+    return false;
   }
-}
-return false;
-}
 
 /*
 @throws IllegalStateException when the board contains non-zero values.
@@ -138,18 +136,16 @@ public int countSolutions(int r, int c){
 
 private int countHelper(int r, int c, int number){
   int count = 0;
-  if (number == board.length * board.length + 1){
-    return 1;
-  }
-  for (int i = 0; i < board.length; i++){
-    for (int x = 0; x < board.length; x++){
-      if (addKnight(r, c, number)) {
-        count += countHelper(r + moves[i][x], c + moves[i][x + 1], number + 1);
-        removeKnight(r, c);
-      }
+  if (board[r][c] == 0) {
+    if (number == board.length * board[r].length){
+      return 1;
     }
   }
+  for (int i = 0; i < board.length; i++){
+      if (addKnight(r + moves[i][0], c + moves[i][1], number)) {
+        count += countHelper(r + moves[i][0], c + moves[i][1], number + 1);
+        removeKnight(r + moves[i][0], c + moves[i][1]);
+      }
+    }
   return count;
-}
-
 }
