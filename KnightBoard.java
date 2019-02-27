@@ -14,10 +14,12 @@ public class KnightBoard {
   */
 
   public static void main(String[] args) {
-     KnightBoard knight = new KnightBoard(4, 4);
-    //System.out.println(knight.solve(0, 0));
-    // System.out.println(knight);
-     System.out.println(knight.countSolutions(2, 1));
+    	KnightBoard a = new KnightBoard(5, 5);
+
+    	System.out.println(a);
+    	System.out.println(a.solve(2,2));
+    	//System.out.println("number of solutions: " + a.countSolutions(3, 3));
+    	System.out.println(a);
    }
 
 
@@ -41,10 +43,9 @@ private void clear(){
 
   //Initialize the board to the correct size and make them all 0's
 public String toString(){
-  int count = 0;
   String result = "";
   for (int i = 0; i < board.length; i++){
-    for (int x = 0; x < board.length; x++){
+    for (int x = 0; x < board[i].length; x++){
       if (board.length * board[i].length < 10) {
         if (board[i][x] == 0){
           result += '_';
@@ -159,19 +160,17 @@ public boolean solve(int r, int c){
 }
 
 private boolean solveH(int r ,int c, int level){
-  if (level == board.length * board.length + 1){
+  if (level == board.length * board[0].length + 1){
     return true;
   }
   for (int i = 0; i < board.length; i++) {
-    for (int x = 0; x < board.length; x++){
-      if (addKnight(r, c, level)) {
-        if (solveH(r + moves[i][x], c + moves[i][x + 1], level + 1)){
+      if (addKnight(r + moves[i][0], c + moves[i][1], level)) {
+        if (solveH(r + moves[i][0], c + moves[i][1], level + 1)) {
           return true;
         }
-      else removeKnight(r, c);
+      else removeKnight(r + moves[i][0], c + moves[i][1]);
     }
   }
-}
 return false;
 }
 
