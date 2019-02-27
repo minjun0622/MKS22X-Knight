@@ -1,6 +1,6 @@
 public class KnightBoard {
   private int[][] board;
-  //2d arrays storing the moves of the board. My notes were converted basically.
+  //array storing the moves of the board. My notes were converted basically.
   private int[] moves{2,1, 1,2, -2,-1, -1,-2, -2,1, 2,-1, -1,2, 1,-2};
   /*
   moving up right - board[i - 2][x + 1]
@@ -12,16 +12,6 @@ public class KnightBoard {
   moving left up - board[i - 1][x - 1]
   moving left down - board[i - 1][x + 1]
   */
-
-  public static void main(String[] args) {
-    	KnightBoard a = new KnightBoard(5, 5);
-
-    	System.out.println(a);
-    	System.out.println(a.solve(2,2));
-    	//System.out.println("number of solutions: " + a.countSolutions(3, 3));
-    	System.out.println(a);
-   }
-
 
 //if the dimensions of the board are odd, then it means that it will not be a closed tour.
 //@throws IllegalArgumentException when either parameter is <= 0.
@@ -42,36 +32,19 @@ private void clear(){
 }
 
   //Initialize the board to the correct size and make them all 0's
-public String toString(){
-  String result = "";
-  for (int i = 0; i < board.length; i++){
-    for (int x = 0; x < board[i].length; x++){
-      if (board.length * board[i].length < 10) {
-        if (board[i][x] == 0){
-          result += '_';
-        }
-        else {
-          result += " " + board[i][x] + " ";
-        }
-      }
-      else {
-        if (board[i][x] < 10){
-          if (board[i][x] == 0){
-            result += " _ ";
-          }
-          else {
-            result += " " + board[i][x] + " ";
-          }
-        }
-        else {
-          result += board[i][x] + " ";
-        }
-      }
-      }
-      result += "\n";
-    }
-    return result;
-  }
+  public String toString() {
+     String result = "";
+     for (int r = 0; r < board.length; r++) {
+       for (int c = 0; c < board[0].length; c++) {
+         if (board[r][c] < 10) {
+           result += " " + board[r][c] + " ";
+         }
+         else result += board[r][c] + " ";
+       }
+       result += "\n";
+     }
+     return result;
+   }
 
 
 /*
